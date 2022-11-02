@@ -614,8 +614,8 @@ public class 문자열배열_3 {
         //////////////////////////////////////////// 데이터 저장 ====> File
         Scanner scan = new Scanner(System.in);
         int curpage=1;
+        // 총페이지 ==> Math.ceil() : 올림함수
         int totalpage=(int)(Math.ceil(title.length/10.0));
-        //ceil ==> 올림 함수
         // 총갯수 ==> 24 ==> 24/10 ==> 2+1 10 10 4
         //			24/10.0 ==> 2.4 ==> 3
         System.out.println("페이지 입력(1~"+totalpage+"):");
@@ -627,7 +627,8 @@ public class 문자열배열_3 {
         
         int j=0; //10개씩 나눠주는 변수
         int rowSize=10;// 몇 개씩 출력할 것인지
-        int pagecnt=(curpage*rowSize)-rowSize;//인덱스의 시작 위치 
+        // 인덱스의 시작위치
+        int pagecnt=(curpage*rowSize)-rowSize;
         /*
          * 	1 page
          * 	0
@@ -644,7 +645,7 @@ public class 문자열배열_3 {
          */
         for(int i=0;i<title.length;i++)
         {
-        	if(j<rowSize && i>pagecnt)
+        	if(j<rowSize && i>pagecnt) // 페이지 나누기
         	{
         		System.out.println((i+1)+"."+title[i]+"-----"+singer[i]+"["+album[i]+"]");
         		j++;
