@@ -17,9 +17,9 @@ import java.util.Arrays;
  * 			2) toLowerCase : 소문자 변환
  * 			*****3) valueOf : 모든 데이터형을 문자열로 변경
  * 					int a=10;
- * 					ValueOf(a) ==> "10" ==> parseInt("10") ==> 10
+ * 					valueOf(a) ==> "10" ==> parseInt("10") ==> 10
  * 					boolean b=true
- * 					ValueOf(b)==>"true" ==> parseBoolean("true") ==> true
+ * 					valueOf(b)==>"true" ==> parseBoolean("true") ==> true
  * 		2. 문자 제어
  * 			*X10000 1) subString() ==> 문자열 자를때 사용(화면 UI)
  * 		3. 문자 변경
@@ -57,7 +57,7 @@ import java.util.Arrays;
  * 		6. 기타
  * 			1) concat("a","b") ==> ab ==> +기호가 있어서 중요하지 않다
  * 				"a"+"b" => "ab" 
- * 			*****2) charAt() ==> 문자 한 개를 갖가지고 올때
+ * 			*****2) charAt() ==> 문자 한 개를 가지고 올때
  * 			3) toCharArray() => 문자열을 char[]변경
  *			------------------------------------------------------기능/용도/사용처
  */
