@@ -12,7 +12,7 @@ public class 문자열배열_6 {
 		
 		//1
 		// 현재페이지 설정 
-		int curpage = 1; // ???????????????????????
+		int curpage = 1; 
 		
 		// 총페이지 구하기
 		int totalpage = (int)(Math.ceil(guest.length/10.0));
@@ -22,21 +22,26 @@ public class 문자열배열_6 {
 		System.out.println("1~"+totalpage+" 페이지 입력:");
 		curpage=scan.nextInt();
 		System.out.println("========="+curpage+" page 내용 =========");
-		
-		
-		
-		
-		
-		
-		
-	    
+		// 페이지 나누기
+		int j=0; // 10개씩 나눠주는 변수 j<10 11이 되면 종료할 수 있도록
+		int pagecnt=(curpage*10)-10;
+		//1page => 0(시작 위치), 2page => 10, 3page => 20 ==> 배열의 인덱스 시작 번호(출력) ==> 앞은 스킵
+		for(int i=0;i<guest.length;i++)
+		{
+			if(j<10 && i>=pagecnt)
+			{
+				System.out.println((i+1)+"."+guest[i]);
+				j++;
+			}
+		}
+		System.out.println("==========================");
 		//2
-		System.out.println("이름 입력>>");
-		String td = scan.next();
+		System.out.println("검색어 입력:");
+		String fd = scan.next();
 		
 		for(int i=0;i<guest.length;i++)
 		{
-			if(guest[i].contains(td))
+			if(guest[i].contains(fd))
 			{
 				System.out.println(guest[i]+" ");
 			}
