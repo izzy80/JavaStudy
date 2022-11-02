@@ -621,8 +621,35 @@ public class 문자열배열_3 {
         System.out.println("페이지 입력(1~"+totalpage+"):");
         curpage=scan.nextInt();
         System.out.println(curpage+" page / "+totalpage+" pages");
+        
         System.out.println("========== "+curpage+" page============");
-        		
+        System.out.println();
+        
+        int j=0; //10개씩 나눠주는 변수
+        int rowSize=10;// 몇 개씩 출력할 것인지
+        int pagecnt=(curpage*rowSize)-rowSize;//인덱스의 시작 위치 
+        /*
+         * 	1 page
+         * 	0
+         *	..
+         *	9
+         *	2 page
+         *	10
+         *	..
+         *	19
+         *	3 page
+         *	20
+         *	...
+         *	29
+         */
+        for(int i=0;i<title.length;i++)
+        {
+        	if(j<rowSize && i>pagecnt)
+        	{
+        		System.out.println((i+1)+"."+title[i]+"-----"+singer[i]+"["+album[i]+"]");
+        		j++;
+        	}
+        }
 	}
 
 }
