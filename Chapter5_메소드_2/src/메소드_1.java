@@ -83,6 +83,7 @@
  *		------------------------------
  */
 // printf(String format, Object... args)
+import java.util.Arrays;
 import java.util.Scanner;
 import javax.swing.*;
 public class 메소드_1 {
@@ -317,6 +318,34 @@ public class 메소드_1 {
 		result=title[no];
 		return result;
 	}
+	
+	
+	static void sort(int[] arr)
+	{
+		Arrays.sort(arr);
+		for(int i:arr)
+		{
+			System.out.print(i+" ");
+		}
+		System.out.println("----------------");
+		for(int i=arr.length-1;i>=0;i--)
+		{
+			System.out.print(arr[i]+" ");
+		}//desc
+	}
+	
+	
+	static void gugudan()
+	{
+		for(int i=1;i<=9;i++)
+		{
+			for(int j=2;j<=9;j++)
+			{
+				System.out.printf("%d*%d=%d\t",j,i,j*i);
+			}
+			System.out.println();
+		}
+	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		/*int a=10;
@@ -340,8 +369,23 @@ public class 메소드_1 {
 			System.out.println("ID나 Password가 틀립니다!!");
 		}
 		*/
-		String title = recommand();
-		System.out.println(title);
+		
+		/*String title = recommand();
+		System.out.println(title);*/
+		
+		/*int[] arr = new int[5];
+		for(int i=0;i<arr.length;i++)
+		{
+			arr[i]=(int)(Math.random()*100)+1;
+		}
+		System.out.println(Arrays.toString(arr));
+		// 정렬해서 출력 요청
+		sort(arr);
+		System.out.println();
+		sort(arr);*/
+		
+		gugudan();
+		
 	}
 
 }
