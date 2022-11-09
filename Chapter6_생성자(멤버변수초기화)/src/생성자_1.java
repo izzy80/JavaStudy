@@ -36,13 +36,19 @@
  *  	}
  *  	
  *  	class A
- *  		=> A()
+ *  		=> A() ==> 컴파일러에 의해서 자동 추가 (디폴트 생성자)
  *  			A(int a)
  *  			A(int a, int b)
+ *  			A(String name)
+ *  			void A(String name, String name) ==> 일반 인스턴스 메소드
  *  
  */
 public class 생성자_1 {
-	//
+	생성자_1(){
+		System.out.println("생성자 Call...");
+		// 생성자는 호출시에 반드시 new 생성자()
+	}
+	
 	int a=10;
 	//int b; 오류나는 코드
 	int b=10*10*10;
@@ -52,8 +58,9 @@ public class 생성자_1 {
 		// TODO Auto-generated method stub
 		String s = new String();
 		// String s = new ; 쓰고 ctrl+space 누르면 생성자가 많이 있다. 
-		//생성자_1 a=new 생성자_1();
-		
+		생성자_1 a=new 생성자_1(); // 생성자 호출
+		//생성자_1(); // 생성자 호출이 안 됨. 
+		new 생성자_1();
 	}
 	//
 
