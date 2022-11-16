@@ -31,7 +31,7 @@ public class MainClass_예외처리실행순서 {
 		{
 			System.out.println(3);
 			System.out.println(10/0); // => catch 이동. 
-			// error나는 밑에 문장은 수행하지 못함. error부터 2개의 문장 건너뛰고 수행
+			// error나는 밑에 문장부터 수행하지 못함. error부터 2개의 문장 건너뛰고 수행
 			System.out.println(5);
 		}catch(RuntimeException ex)
 		{
