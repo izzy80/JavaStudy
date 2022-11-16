@@ -69,7 +69,7 @@ package com.sist.exception;
  *											------------- 사전 방지
  *					 회원가입 : * 필수입력 (값이 없는 경우(null) 오라클에서 에러발생) => NOT NULL
  *				목적 : 프로그램의 비정상종료를 방지하고 정상 상태를 유지
- *			5) 자바에서 지원하는 예외처리의 계층구조
+ *			5) 자바에서 지원하는 예외처리의 계층구조 (잘 기억하기)
  *				Error : 메모리가 부족, 윈도우 작동을 안 함. 이클립스문제 발생
  *				Exception : 파일명이 틀리다, IP가 틀리다, 웹사이트주소가 틀리다..., SQL문장을 잘못 수행
  *							Object 
@@ -78,7 +78,7 @@ package com.sist.exception;
  *							   |
  *					---------------------------------
  *					|								|
- *					Error(수정이 불가능)			Exception(수정이 가능한 에러) # Exception 하나쓰면 에러 다 잡아줌
+ *					Error(수정이 불가능)			Exception(수정이 가능한 에러) # Exception 하나쓰면 아래의 양사이드 에러를 다 잡아줌
  *													|
  *												----------------------------------------
  *					 							|								 		|
@@ -87,7 +87,7 @@ package com.sist.exception;
  *											MalformedURLException(URL, 서버)			ArrayIndexOutOfBoundsException
  *											ClassNotFoundException(리플렉션)			NumberFormatException
  *											InterruptedException(쓰레드)				NullPointerException
- *																					ClasCastException
+ *																					ClassCastException
  *																					ArithmeticException
  *											----------------------------------		----------------------------------					
  * 											CheckException							UnCheckException
@@ -104,6 +104,47 @@ package com.sist.exception;
  * 				2. 간첩 처리(예외 회피 = 예외 떠넘기기) => 자바시스템에 맡긴다
  * 				3. 예외 임의 발생(사용자가 예외처리)
  * 				4. 사용자 정의 예외처리	
+ * 
+ * =================================================================================================================
+ * 				1. 직접처리(예외 복구) : 웹, 데이터베이스는 CheckException (무조건 예외처리를 해야 된다)
+ * 					1) 변수 , 2) 메소드, 3) 예외처리, 4) SQL
+ * 					-----------------------------------
+ * 				2. 형식
+ * 					try
+ * 					{
+ * 						정상수행이 가능한 소스
+ * 						= 지금까지 코딩한 부분
+ * 					}catch(예외처리 종류)
+ * 					{
+ * 						에러발생 처리하는 영역 => 실질적으로 지금은 에러 확인 ==> 예상되는 예외처리 ==> catch(여러번 사용이 가능)
+ * 					}
+ * 					finally
+ * 					{
+ * 						try, catch 수행 상관없이 무조건 수행하는 문장 ==> 생략이 가능
+ * 						에러발생, 정상 수행 상관없이 무조건 수행하는 문장이 존재
+ * 						----------------------------------------
+ * 						1) 파일 닫기
+ * 						2) 오라클 닫기 => 라이센스가 없어서 test(XE)버전 사용. 동시에 50명 접근하면 무너짐. 에러가 나도 정상수행을 해도 닫아야함
+ * 						3) 서버 닫기						
+ * 					}
+ * 					*** 예외처리
+ * 					1. 고민 : 예상되는 에러
+ * 					예) 
+ * 						두개의 정수를 문자열을 받아서 정수배열에 저장. 저장된 데이터를 나누기를 하는 프로그램 제작
+ * 						예상되는 에러는? 1. 배열 인덱스 : ArrayIndexOutOfBoundsException
+ * 									2. 문자열 => 정수 변경하는 과정 : NumberFormatException
+ * 									3. 나누기(0) : ArithmeticException
+ * 						예외처리는 생각한 갯수 + 1(기타)로 해주어야함. (생각지도 못 했던 에러가 튀어나올수도 있어서)
+ * 											---- 모든 에러를 잡을 수 있는 것으로 처리
+ * 					*** 신입일때는 catch에러를 생각해서 잘 사용하기!!!!
+ * 
+ * 					2. 고민 : 예외처리의 위치
+ * 						
+ * 
+ * 
+ * 
+ * 
+ * 
  */
 public class MainClass_예외처리 {
 
@@ -111,13 +152,55 @@ public class MainClass_예외처리 {
 		// TODO Auto-generated method stub
 		/*int[] arr = new int[2];
 		arr[2]=100; //ArrayIndexOutOfBoundsException 오류*/
-		try
+		//------------------------------------------------------------------
+		/*try
 		{
 			
 		}
 		catch(ArithmeticException ex) {}
 		catch(ArrayIndexOutOfBoundsException ex) {}
-		catch(RuntimeException ex) {}
+		catch(RuntimeException ex) {}*/
+		//------------------------------------------------------------------
+		/*try
+		{
+			for(int i=1;i<=10;i++)
+			{
+				int r = (int)(Math.random()*3); // 0,1,2
+				if(r==0)// 0이면 오류가 나서 조건문 걸어줌
+				{
+					i--;
+					continue;
+				}
+				System.out.println(i+"-"+(i/r));
+			}
+		}catch(Exception ex)
+		{
+			ex.printStackTrace(); //에러 확인 : 예외발생 당시의 호출스택에 있었던 메서드의 정보와 예외 메시지를 출력
+		}*/
+		//위에 코드보다 아래 코드로 사용한다. 
+		// try~catch는 전체 소스를 사용 ==> 부분적으로 사용이 가능
+		for(int i=1;i<=10;i++)
+		{
+			try
+			{
+				int r = (int)(Math.random()*3);
+				System.out.println(i+"-"+(i/r));
+			}catch(Exception ex)
+			{
+				i--;
+			}
+			// 밖에 있느냐 안에 있느냐에 따라 수행하는 내용이 달라질 수 있다. 
+		}
+		/*
+		 * -----------
+		 * ----------
+		 * ----------------
+		 * try{
+		 * ----------에러
+		 * ---------에러
+		 * }catch(){}
+		 * -----------
+		 */
 		
 
 	}
