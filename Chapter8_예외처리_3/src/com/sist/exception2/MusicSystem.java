@@ -45,7 +45,7 @@ public class MusicSystem {
 	{
 		MusicVO[] music = new MusicVO[50]; // 한 번에 50곡을 가져와라 # 한 페이지에 50곡씩 있음
 		// URL 연결
-		Document doc = Jsoup.connect(url[type-1]).get(); // Document 여러개 있는데 jsoup.nodes를 선택해서 가져오기
+		Document doc = Jsoup.connect(url[type]).get(); // Document 여러개 있는데 jsoup.nodes를 선택해서 가져오기
 		Elements title = doc.select("table.list-wrap td.info a.title");//org.jsoup.select
 		Elements singer = doc.select("table.list-wrap td.info a.artist");
 		Elements album = doc.select("table.list-wrap td.info a.albumtitle");
