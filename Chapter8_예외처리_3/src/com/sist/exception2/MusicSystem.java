@@ -32,7 +32,7 @@ import org.jsoup.select.Elements;
  */
 public class MusicSystem {
 	private String[] url = {
-			"", // type에서 0번을 안 고르면 0번 자체를 버린다
+			"", // type에서 0번을 안 고르면 0번 자체를 버린다 -> url[type-1]을 해주거나 ""을 만들어준다. 
 			"https://www.genie.co.kr/chart/top200",
 			"https://www.genie.co.kr/chart/genre?ditc=D&ymd=20221116&genrecode=M0100",
 			"https://www.genie.co.kr/chart/genre?ditc=D&ymd=20221116&genrecode=M0200",	
