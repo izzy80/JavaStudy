@@ -39,22 +39,76 @@ package com.sist.exception2;
  *						==> if문으로 처리가 가능하면 if문으로 처리한다. 
  *						==> try = if, catch = else
  *		- 직접처리 (예외복구)
- *			try{정상적으로 실행되는 문장(오류가 발생할 수도 있다. #일부로 에러를 내는 프로그램을 집어넣는 것은 아님)}
- *			catch{}
- *			finally{}
- *		- 간접처리 (예외회피 : 다른 사람이 예외를 처리할 수 있도록)  
- * 
- * 		
- * 
- * 
- * 
- * 
+ *			try{정상적으로 실행되는 문장(오류가 발생할 수도 있다, 실수 #일부로 에러를 내는 프로그램을 집어넣는 것은 아님)}
+ *			catch{실수한 부분을 처리} ==> 여러개 사용이 간으(순서가 존재 => 계층구조)
+ *				catch절을 한개만 사용한다면 (Exception, Throwable) # 되도록 Exception을 써야 많이 알아봄
+ *			finally{필수적으로 닫기(자원 반환)}
+ *		- 간접처리 (예외회피 : 다른 사람이 예외를 처리할 수 있도록)
+ *			throws => 예상되는 예외를 선언한다
+ *					  ----------------- 예측이 가능하기 때문에 나중에 사용시 대처하기 쉽다
+ *					사용자정의는 빈도수가 거의 없다, 라이브러리 메소드에서 예측
+ *			=> 선언하는 방법
+ *			=> try~catch
+ *			
+ *			예)
+ *				1)
+ *				public void aaa() throws Exception => 예측한 것이 아니라 어떤 에러를 발생할 지 몰라서 쓴 것
+ *				
+ *				==>
+ *				public void bbb() throws Exception
+ *				{
+ *					aaa();
+ *				} 
+ *
+ *				2)
+ *				public void bbb();
+ *				{
+ *					try
+ *					{
+ *						aaa();
+ *					}catch(Exception e){}
+ *				}
+ *			기타적
+ *			---- 
+ *				임의발생 : 고의로 발생 ==> 테스팅 ==> continue
+ *					throw new 예외처리생성자();
+ *				사용자 정의
+ *					class My extends Exception
+ *					{
+ *					}
+ *				사용자 정의 => 지원하지 않는 것을 만든다 (자바 예외처리는 대부분 있다) # 특별한 경우가 아니면 만들지 않는다. 자바에서 대부분 있기 때문에
+ *
+ *		---------------------------------------------------------------------------------------------------------------- 기본 코딩(문법) 종료
+ *		내일부터는~~
+ *				라이브러리
+ *				-------
+ *				java.lang.* ==> 9장
+ *					Object, String, StringBuffer, Wrapper, Math, System, Scanner
+ *												  -------
+ *													데이터형을 클래스화
+ *													int => Integer
+ *													double => Double
+ *													boolean ==> Boolean
+ *													byte ==> Byte
+ *													# 데이터를 쉽게 제어하기 위해서
+ *				java.util.* ==> 9장에서 일부 나옴 => 10,11,12
+ *					==> List / Map / Set ==. Collection
+ *				java.io.* ==> 13장
+ *				java.text.* ==> 10장
+ *				java.net.* ==> 마지막장
+ *				--------------javax.http.*
+ *							  java.sql.*
+ *							  ---------------얘네 둘은 JSP에서 나옴
+ *
+ *				이 정도 수준에서 배움
+ *
  */
 public class 예외처리정리 {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
+		//									-----------------------------Thread부분에 마우스 가져다 대면 노란색 창에 add Throws declaration 누르면 생김
 		// TODO Auto-generated method stub
-
+		Thread.sleep(1000); // 그냥 쓰면 오류나기 때문에 예외처리 필요함
 	}
 
 }
