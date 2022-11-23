@@ -1,6 +1,14 @@
+// 데이터는 건들지 않고 메소드만 건들임. 
 package com.sist.movie;
 import java.util.*;
 import java.io.*;
+/*
+ * 목록
+ * 상세
+ * 검색
+ * ----
+ * 
+ */
 public class MovieSystem {
 	private static ArrayList movieList = new ArrayList(); // => 오라클
 	// 접속하는 모든 사람이 데이터를 볼 수 있도록 static(공유변수)을 사용함. 
@@ -9,7 +17,7 @@ public class MovieSystem {
 	{
 		try
 		{
-			FileReader fr = new FileReader("C:\\javaDev\\movie.txt");
+			FileReader fr = new FileReader("c:\\javaDev\\movie.txt");
 			int i=0;
 			StringBuffer sb = new StringBuffer(); // movie에 있는 데이터를 sb에 모아주기 위해서
 			while((i=fr.read())!=-1) // 파일 끝까지 읽기 => 한 글자씩 읽어온다
@@ -22,7 +30,7 @@ public class MovieSystem {
 			String[] temp = movie.split("\n"); // 한 줄씩 읽는다
 			for(String m:temp) //m => 영화 한 개에 정보
 			{
-				String[] mm=m.split("\\|");
+				String[] mm=m.split("\\|"); //StringTokenizer을 사용해서 자를 수도 있음
 				Movie mov = new Movie();
 				mov.setMno(Integer.parseInt(mm[0]));
 				mov.setTitle(mm[1]);
@@ -74,5 +82,41 @@ public class MovieSystem {
 	{
 		return (Movie)movieList.get(mno-1);
 	}
-	
+	public ArrayList movieFind(int type, String fd)
+	{
+		ArrayList list = new ArrayList(); // 찾은 데이터를 묶어서 전송
+		for(int i=0;i<movieList.size();i++)
+		{
+			Movie m = (Movie)movieList.get(i);
+			if(type==1) // MainClass_조립기에서 1 => 제목 
+			{
+				if(m.getTitle().contains(fd))
+				{
+					list.add(m);
+				}
+			}
+			else if(type==2) // 2 => 출연
+			{
+				if(m.getActor().contains(fd))
+				{
+					list.add(m);
+				}
+			}
+			else if(type==3) // 3=> 장르
+			{
+				if(m.getGenre().contains(fd))
+				{
+					list.add(m);
+				}
+			}
+				
+		}
+		return list;
+	}
 }
+/*
+ * 다른 내용
+ * 자바로 HTML만들어줌. 실제로 만들어진 브라우저의 소스를 보면 java코드는 없고 HTML만 출력함
+ * <% %> 부분은 다 사라지고 초로색 글씨만 출력
+ */
+
